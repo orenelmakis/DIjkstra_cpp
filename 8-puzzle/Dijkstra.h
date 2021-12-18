@@ -3,6 +3,14 @@
 
 using namespace std;
 
+
+struct Node
+{
+    Node* parent;
+
+};
+
+
 class Dijkstra{
     
 
@@ -16,12 +24,11 @@ class Dijkstra{
         double YWidth;
         double Resolution;
         double RobotSize;
-        vector<vector<bool>> ObsList;
         vector<vector<bool>> ObsMap;
 
 
         Dijkstra(double,double,double,double,double,double,double,double);
         double Index2Pos(int,double);
-        // void ObsMapCreation()
+        void ObsMapCreation(vector<vector<double>>);
 
 };

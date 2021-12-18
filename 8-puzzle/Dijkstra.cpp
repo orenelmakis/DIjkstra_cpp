@@ -2,6 +2,7 @@
 #include <limits>
 #include <vector>
 #include "Dijkstra.h"
+#include <bits/stdc++.h>
 // #include "../matplotlib-cpp/matplotlibcpp.h"
 
 
@@ -20,7 +21,38 @@ Dijkstra::Dijkstra(double min_x, double min_y, double max_x,double max_y
     this-> YWidth = y_width;
     this-> Resolution = resolution;
     this-> RobotSize = robot_size;
-    this->ObsList = ObsList;
+
+};
+
+void Dijkstra::ObsMapCreation(vector<vector<double>> ObsMap)
+{
+    int Rows = (int)(this->YWidth/this->Resolution);
+    int Columns = (int)(this->XWidth/this->Resolution);
+    this->ObsMap.resize(Rows);
+    for (size_t i = 0; i < Rows; i++)
+        {
+            this->ObsMap[i].resize(Columns);
+        }
+    for (size_t obs = 0; obs < ObsMap.size(); obs++)
+    {
+        int RowInitIndex = (int)((ObsMap[obs][1]-(ObsMap[obs][2])/2.0)/this->Resolution);
+        int ColumnsInitIndex = (int)((ObsMap[obs][0]-(ObsMap[obs][2]/2.0))/this->Resolution);
+        int ObsSize = (int)(ObsMap[obs][2]/this->Resolution);
+        cout << "Rows index size: " << RowInitIndex << endl; 
+        cout << "Columns index size: " << ColumnsInitIndex << endl;
+
+        for (size_t i = RowInitIndex; i < RowInitIndex+ObsSize; i++)
+        {
+            for (size_t j = ColumnsInitIndex; j < ColumnsInitIndex+ObsSize; j++)
+            {
+                this->ObsMap[i][j] = true;
+                
+            }
+            
+        }
+    }
+
+    
 
 };
 
@@ -36,20 +68,16 @@ double Dijkstra::Index2Pos(int index, double min_pos){
 
 
 int main(){
-    Dijkstra *dij = new Dijkstra(0,0,12,5,5,5,2,1);
+    Dijkstra *dij = new Dijkstra(0,0,30,30,5,5,0.5,5);
     // cout << dij->MaxY << endl;
-    vector<vector<bool>> ObsList;
-    ObsList.resize(5);
-    for(auto i = 0; i < 5; ++i){
-        ObsList[i].resize(2);
-        ObsList[i][0] = true;
-        ObsList[i][1] = false;
-        // cout << i << endl;
-
-    }
-    cout << ObsList[1][1] << endl;
-    // cout << ObsList[1][0] << endl;
-    // cout << ObsList[4][2] << endl;
+    vector<vector<double>> ObsMap;
+    vector<double> value;
+    value.push_back(2);
+    value.push_back(2);
+    value.push_back(2);
+    ObsMap.push_back(value);
+    cout << ObsMap[0][2] << endl;
+    dij->ObsMapCreation(ObsMap);
 
     return 0;
 };
