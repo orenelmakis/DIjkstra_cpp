@@ -67,17 +67,13 @@ double Dijkstra::Index2Pos(int index, double min_pos){
 
 
 
+
+
+
 int main(){
     Dijkstra *dij = new Dijkstra(0,0,30,30,5,5,0.5,5);
-    // cout << dij->MaxY << endl;
-    vector<vector<double>> ObsMap;
-    vector<double> value;
-    value.push_back(2);
-    value.push_back(2);
-    value.push_back(2);
-    ObsMap.push_back(value);
-    cout << ObsMap[0][2] << endl;
-    dij->ObsMapCreation(ObsMap);
+
+
 
     return 0;
 };
